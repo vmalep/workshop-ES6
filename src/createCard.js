@@ -25,6 +25,10 @@ function createCard(house) {
   
   const cardDesc = document.createElement("p");
   cardDesc.innerHTML = desc;
+
+  const cardAvail = document.createElement("p");
+  cardAvail.innerHTML = "Not available anymore";
+  cardAvail.style.fontWeight = "bold";
   
   const cardButton = document.createElement("button");
   cardButton.classList.add("card-button");
@@ -37,8 +41,8 @@ function createCard(house) {
   card.appendChild(cardImg);
   card.appendChild(cardBody);
   cardBody.appendChild(cardDesc);
+  if(!house.available) {cardBody.appendChild(cardAvail);}
   card.appendChild(cardButton);
-
 }
 
 export { createCard }
