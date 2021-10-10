@@ -12,14 +12,15 @@ function submitSearch() {
     document.querySelector(".cards").innerHTML = "";
 
     /* FixMe: filter houseToRent.desc based on an array of keywords */
-/*     const filteredHouses = (houseToRent, searchInputArray) => {
+    const filteredHouses = (houseToRent, searchInputArray) => {
         const filtered = houseToRent.desc.split(" ").filter(el => {
             return searchInputArray.indexOf(el) === -1;
         });
 
         return filtered;
     };
-    console.log(filteredHouses(houseToRent, searchInputArray)); */
+    console.log(filteredHouses(houseToRent, searchInputArray));
+    /*const selectedHouses = filteredHouses.filter(house => ( */
 
     /* Create a selectedHouses from filtered houseToRent */
     const selectedHouses = houseToRent.filter(house => (
