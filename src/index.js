@@ -12,29 +12,36 @@ function submitSearch() {
     document.querySelector(".cards").innerHTML = "";
 
     /* FixMe: filter houseToRent.desc based on an array of keywords */
-    const filteredHouses = (houseToRent, searchInputArray) => {
-        const filtered = houseToRent.desc.split(" ").filter(el => {
-            return searchInputArray.indexOf(el) === -1;
+    let filteredHouses;
+    if(searchInputArray.length != 0) {
+        filteredHouses = houseToRent.filter(house => {
+            house.descArray = house.desc.split(" ");
+
+            if (house.descArray.some(v => searchInputArray.includes(v))) {
+                return true;
+            }
         });
+    } else {
+        filteredHouses = houseToRent;
+        console.log("fitlered house: " + filteredHouses);
+    }
 
-        return filtered;
-    };
-    console.log(filteredHouses(houseToRent, searchInputArray));
-    /*const selectedHouses = filteredHouses.filter(house => ( */
-
+    /*const selectedHouses = filteredHouses.filter( house  => ( */
+        
     /* Create a selectedHouses from filtered houseToRent */
-    const selectedHouses = houseToRent.filter(house => (
+    const selectedHouses = filteredHouses.filter(house => (
         !(!house.available && onlyAvailable) &&
         (homeType === "All" || house.type === homeType)
-    ));
-
-    /* console.log(selectedHouses); */
-
-    /* call the createCard function for the selectedHouses */
-    for (let i = 0; i < selectedHouses.length; i++) {
-        createCard(selectedHouses[i]);
+        ));
+        
+        /* console.log(selectedHouses); */
+        
+        /* call the createCard function for the selectedHouses */
+        for (let i = 0; i < selectedHouses.length; i++) {
+            createCard(selectedHouses[i]);
     }
 }
+            
 
 /* Populate the searchInputArray from the words entered in the search-imput field */
 const searchInput = document.querySelector(".search-input");
